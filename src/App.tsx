@@ -7,13 +7,12 @@ import RosePetals from './Rosepedal'
 import Valentine from './Valentine'
 
 
-function App(): JSX.Element {
+function App() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const boxRef = useRef<HTMLDivElement | null>(null)
   // position of the No button relative to the 200x200 box (center coordinates in px)
   const [noPos, setNoPos] = useState({ left: '150px', top: '100px' })
   const [showFireworks, setShowFireworks] = useState(false)
-  const [showSurprise, setShowSurprise] = useState(false)
   const [showPoem, setShowPoem] = useState(false)
   useEffect(() => {
     // initial: align vertically with Yes (center of 200x200 box), slightly to the right
@@ -71,7 +70,6 @@ function App(): JSX.Element {
   function handleYes() {
     // start fireworks overlay
     setShowFireworks(true)
-    setShowSurprise(true)
     // disable for 3 seconds then redirect to Valentine component
     setTimeout(() => {
       setShowFireworks(false)
