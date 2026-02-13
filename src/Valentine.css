@@ -1,6 +1,6 @@
 .valentine-container {
   width: 100%;
-  min-width: 600px;
+  min-width: 1200px;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -33,32 +33,175 @@
 .valentine-content {
   position: relative;
   z-index: 1;
-
-  width: min(1000px, 75%);
-  min-height: 55vh;
-
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.95);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  gap: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hide scrollbars */
+.letter-section::-webkit-scrollbar {
+  display: none;
+}
+
+.letter-section {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Main Content - Scrapbook Layout */
+.valentine-content-combined {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
-  padding: 3rem;
-  border-radius: 30px;
+/* Scrapbook Container */
+.scrapbook-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
 
-  /* Soft pink glass theme */
-  background: linear-gradient(
-    135deg,
-    rgba(255, 240, 246, 0.9),
-    rgba(255, 214, 232, 0.85),
-    rgba(255, 179, 217, 0.8)
-  );
+/* Polaroid Style Photos */
+.polaroid {
+  position: absolute;
+  background: white;
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+  will-change: transform;
+  animation: fadeInOut 6s infinite ease-in-out;
+}
 
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
 
-  border: 1px solid rgba(255, 255, 255, 0.4);
+.polaroid:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  transform: translateY(-5px) !important;
+  opacity: 1 !important;
+}
 
-  overflow: visible;
+.polaroid img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* Scrapbook Letter - Center Piece */
+.scrapbook-letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  z-index: 10;
+  background: white;
+  padding: 45px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  max-width: 400px;
+  max-height: 85vh;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.scrapbook-letter:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Tape Effect on Letter */
+.letter-tape {
+  position: absolute;
+  width: 80px;
+  height: 25px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 200, 0.8) 50%, rgba(255, 255, 255, 0.7) 100%);
+  border-top: 1px solid rgba(200, 200, 150, 0.3);
+  border-bottom: 1px solid rgba(200, 200, 150, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  z-index: 15;
+}
+
+.letter-tape.top-tape {
+  top: -12px;
+}
+
+.letter-tape.bottom-tape {
+  bottom: -12px;
+  transform: translateX(-50%) rotate(2deg);
+}
+
+
+/* Letter Section - Transparent Overlay */
+.letter-section {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  width: 85%;
+  max-width: 700px;
+  max-height: 85vh;
+  overflow: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Slideshow Section - Removed for Scrapbook */
+.slideshow-section-combined {
+  display: none;
 }
 
 
@@ -88,11 +231,12 @@
 
 .poem-title {
   font-size: 2.5rem;
-  min-width: 600px;
-  color: #ff4da6;
+  min-width: auto;
+  color: white;
   margin-bottom: 30px;
-  text-shadow: 2px 2px 4px rgba(255, 77, 166, 0.1);
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5), 1px 1px 2px rgba(0, 0, 0, 0.3);
   letter-spacing: 2px;
+  font-weight: 700;
 }
 
 .poem-text {
@@ -123,11 +267,28 @@
   font-weight: 500;
 }
 
+.poem-image-container {
+  background: transparent;
+  min-width: auto;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: auto;
+  max-height: 65vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
 
-.slideshow-section.hidden {
-  display: none;
-  opacity: 0;
-  visibility: hidden;
+.letter-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
 /* Slideshow Section */
@@ -148,21 +309,23 @@
 
 /* Container */
 .slideshow-container {
+  position: relative;
   width: 100%;
-  max-width: 900px;
-  margin-top: 30px;
+  height: 100%;
+  max-height: 100vh;
+  margin: 0;
 }
 
 /* Wrapper */
 .slideshow-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 4/3;   /* keeps perfect ratio */
-  border-radius: 20px;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
   overflow: hidden;
-
-  box-shadow: 0 15px 40px rgba(255, 77, 166, 0.2);
-  border: 3px solid #ff4da6;
+  box-shadow: none;
+  border: none;
 }
 
 
@@ -363,36 +526,44 @@ img {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .valentine-content {
-    height: 100vh;
-    padding: 20px;
+  .valentine-content-combined {
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
   }
 
-  .poem-section {
+  .letter-section {
+    width: 90%;
+    max-width: 100%;
+    max-height: 75vh;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 10;
     padding: 20px;
+    background: transparent;
+  }
+
+  .slideshow-section-combined {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
   }
 
   .poem-title {
     font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   }
 
-
-  .poem-text p {
-    font-size: 1rem;
+  .poem-image-container {
+    min-width: auto;
+    max-height: 40vh;
+    background: transparent;
   }
 
-  .nav-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
-  }
-
-  .prev-btn {
-    left: 5px;
-  }
-
-  .next-btn {
-    right: 5px;
+  .slideshow-container {
+    max-height: 100%;
   }
 
   .rose-decoration {
@@ -402,57 +573,48 @@ img {
   .heart-overlay {
     font-size: 2rem;
   }
-
-  .toggle-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    margin: 15px auto;
-  }
 }
 
 @media (max-width: 480px) {
-  .valentine-content {
-    padding: 10px;
-    height: 100vh;
+  .valentine-content-combined {
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
   }
 
-  .poem-section {
+  .letter-section {
+    width: 95%;
+    max-width: 100%;
+    max-height: 70vh;
     padding: 15px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: transparent;
+  }
+
+  .slideshow-section-combined {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
   }
 
   .poem-title {
     font-size: 1.5rem;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
   }
 
-  .slideshow-wrapper {
-    border-width: 2px;
+  .poem-image-container {
+    min-width: auto;
+    max-height: 35vh;
+    border: none;
+    background: transparent;
   }
 
-  .nav-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 1.2rem;
-  }
-
-  .toggle-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    margin: 10px auto;
-  }
-
-  .indicators {
-    gap: 8px;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-  }
-
-  .home-btn {
-    padding: 8px 20px;
-    font-size: 0.85rem;
+  .slideshow-container {
+    max-height: 100%;
   }
 
   .rose-decoration {
@@ -460,98 +622,52 @@ img {
   }
 }
 
-  .poem-section {
-    padding: 20px;
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+  .scrapbook-container {
+    height: 90vh;
   }
 
-  .poem-title {
-    font-size: 1.8rem;
+  .polaroid img {
+    width: 120px;
+    height: 120px;
   }
 
-
-
-  .poem-text p {
-    font-size: 1rem;
-  }
-
-  .nav-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
-  }
-
-  .prev-btn {
-    left: 5px;
-  }
-
-  .next-btn {
-    right: 5px;
-  }
-
-  .rose-decoration {
-    font-size: 2rem;
-  }
-
-  .poem-section {
+  .scrapbook-letter {
+    max-width: 400px;
+    max-height: 500px;
     padding: 15px;
   }
 
-  .poem-title {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+  .letter-image {
+    max-height: 450px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+  .scrapbook-container {
+    height: 95vh;
   }
 
-
-  .slideshow-wrapper {
-    border-width: 2px;
+  .polaroid img {
+    width: 80px;
+    height: 80px;
   }
 
-  .nav-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 1.2rem;
-  }
-
-  .toggle-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    margin: 10px auto;
-  }
-
-  .indicators {
-    gap: 8px;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-  }
-
-  .home-btn {
-    padding: 8px 20px;
+  .scrapbook-letter {
+    max-width: 280px;
+    max-height: 400px;
+    padding: 10px;
     font-size: 0.85rem;
   }
 
-  .rose-decoration {
-    font-size: 2rem
-  }
-  .nav-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 1.2rem;
+  .letter-tape {
+    width: 50px;
+    height: 18px;
   }
 
-  .toggle-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-
-  .indicators {
-    gap: 8px;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
+  .letter-image {
+    max-height: 350px;
   }
 }
