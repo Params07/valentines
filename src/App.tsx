@@ -17,7 +17,55 @@ function App() {
   useEffect(() => {
     // initial: align vertically with Yes (center of 200x200 box), slightly to the right
     setNoPos({ left: '150px', top: '100px' })
-  }, [])
+    
+    // Move NO button automatically every 1-2 seconds
+    const interval = setInterval(() => {
+      if (!showFireworks) {
+        setNoPos(prevPos => {
+          const curX = typeof prevPos.left === 'string' ? parseInt(prevPos.left, 10) : prevPos.left
+          const curY = typeof prevPos.top === 'string' ? parseInt(prevPos.top, 10) : prevPos.top
+          
+          const padding = 8
+          const btnW = 64
+          const btnH = 32
+          
+          const minCenterX = padding + btnW / 2
+          const maxCenterX = 200 - btnW / 2 - padding
+          const minCenterY = padding + btnH / 2
+          const maxCenterY = 200 - btnH / 2 - padding
+          
+          function rand(min: number, max: number) {
+            return Math.round(Math.random() * (max - min) + min)
+          }
+          
+          const dx = curX - 100
+          const dy = curY - 100
+          let targetX = curX
+          let targetY = curY
+          
+          if (Math.abs(dx) > Math.abs(dy)) {
+            targetX = curX < 100 ? maxCenterX : minCenterX
+            targetY = rand(minCenterY, maxCenterY)
+          } else if (Math.abs(dy) > Math.abs(dx)) {
+            targetY = curY < 100 ? maxCenterY : minCenterY
+            targetX = rand(minCenterX, maxCenterX)
+          } else {
+            if (Math.random() < 0.5) {
+              targetX = curX < 100 ? maxCenterX : minCenterX
+              targetY = rand(minCenterY, maxCenterY)
+            } else {
+              targetY = curY < 100 ? maxCenterY : minCenterY
+              targetX = rand(minCenterX, maxCenterX)
+            }
+          }
+          
+          return { left: `${targetX}px`, top: `${targetY}px` }
+        })
+      }
+    }, 1500 + Math.random() * 1000) // 1.5-2.5 seconds
+    
+    return () => clearInterval(interval)
+  }, [showFireworks])
 
   function moveNoAway(e: React.MouseEvent) {
     const box = boxRef.current
@@ -90,7 +138,10 @@ function App() {
       <RosePetals />
      
        <div className={` ${!showFireworks ? 'card valentine-card ': 'accepted'}  `} >
-       {!showFireworks ? <h1 className="main-text">Will you be my Valentine? Subhalakshmi ❤️</h1>:
+       {!showFireworks ? <>
+       <h1 className="main-text">Will you be my Valentine? Subhalakshmi ❤️</h1>
+       <p className="caption-text">(Fair warning: the 'NO' button is shy 😏)</p>
+       </>:
        <div> <h1>You're my Valentine! ❤️</h1>
       <p>Thanks for saying yes — here's to love and happy moments.</p></div>
        }
