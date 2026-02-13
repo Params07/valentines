@@ -1,90 +1,49 @@
+/* =========================================
+   RESET
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: url('/Pink and White Watercolor Floral Background Poster.png') center/cover no-repeat fixed;
+}
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
 .valentine-container {
   width: 100%;
   min-width: 1200px;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
   position: relative;
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-/* Animated background hearts */
-.valentine-container::before,
-.valentine-container::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Main Content */
-.valentine-content {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.95);
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: space-between;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  gap: 20px;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Hide scrollbars */
-.letter-section::-webkit-scrollbar {
-  display: none;
-}
-
-.letter-section {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Main Content - Scrapbook Layout */
+/* =========================================
+   BACKGROUND CONTENT
+========================================= */
 .valentine-content-combined {
   position: relative;
-  z-index: 1;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  box-sizing: border-box;
   overflow: hidden;
 }
 
-/* Scrapbook Container */
+/* =========================================
+   SCRAPBOOK CONTAINER
+========================================= */
 .scrapbook-container {
   position: relative;
   width: 100%;
@@ -92,392 +51,89 @@
   perspective: 1000px;
 }
 
-/* Polaroid Style Photos */
+/* =========================================
+   POLAROID PHOTOS
+========================================= */
 .polaroid {
   position: absolute;
   background: white;
   padding: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
-  will-change: transform;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, opacity 0.5s ease;
   animation: fadeInOut 6s infinite ease-in-out;
 }
 
+.polaroid img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
 @keyframes fadeInOut {
-  0% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.3;
-  }
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
 }
 
 .polaroid:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.05);
   transform: translateY(-5px) !important;
   opacity: 1 !important;
 }
 
-.polaroid img {
-  display: block;
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 2px;
-}
-
-/* Scrapbook Letter - Center Piece */
+/* =========================================
+   CENTER LETTER CONTAINER
+========================================= */
 .scrapbook-letter {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-2deg);
   z-index: 10;
-  background: white;
-  padding: 45px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
-  border-radius: 3px;
-  max-width: 400px;
-  max-height: 85vh;
-  overflow: hidden;
-  transition: transform 0.3s ease;
 }
 
-.scrapbook-letter:hover {
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
-}
-
-/* Tape Effect on Letter */
-.letter-tape {
-  position: absolute;
-  width: 80px;
-  height: 25px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 200, 0.8) 50%, rgba(255, 255, 255, 0.7) 100%);
-  border-top: 1px solid rgba(200, 200, 150, 0.3);
-  border-bottom: 1px solid rgba(200, 200, 150, 0.3);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.5);
-  left: 50%;
-  transform: translateX(-50%) rotate(-1deg);
-  z-index: 15;
-}
-
-.letter-tape.top-tape {
-  top: -12px;
-}
-
-.letter-tape.bottom-tape {
-  bottom: -12px;
-  transform: translateX(-50%) rotate(2deg);
-}
-
-
-/* Letter Section - Transparent Overlay */
-.letter-section {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  box-sizing: border-box;
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  border: none;
-  width: 85%;
-  max-width: 700px;
-  max-height: 85vh;
-  overflow: hidden;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Slideshow Section - Removed for Scrapbook */
-.slideshow-section-combined {
-  display: none;
-}
-
-
-/* Poem Section */
-.poem-section {
-  width: 100%;
-  height: 100%;
-  min-width: 600px;
-  text-align: center;
-  animation: fadeIn 0.5s ease-in-out;
-  transition: opacity 0.5s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  box-sizing: border-box;
-  opacity: 1;
-  visibility: visible;
-}
-
-.poem-section.hidden {
-  display: none;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.poem-title {
-  font-size: 2.5rem;
-  min-width: auto;
-  color: white;
-  margin-bottom: 30px;
-  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5), 1px 1px 2px rgba(0, 0, 0, 0.3);
-  letter-spacing: 2px;
-  font-weight: 700;
-}
-
-.poem-text {
-  background: linear-gradient(135deg, #fff9fc 0%, #ffe4f0 100%);
-  min-width: 500px;
-  border-radius: 15px;
-  border: 5px solid #ff4da6;
-  box-shadow: 0 5px 15px rgba(255, 77, 166, 0.1);
-  height: auto;
-  max-height: 65vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;  /* better than center */
-  box-sizing: border-box;   /* 🔥 important */
-  margin-bottom: 20px;
-}
-
-.poem-text::-webkit-scrollbar {
-  display: none;               /* Chrome, Safari */
-}
-
-.poem-text p {
-  font-size: 1.1rem;
-  color: #6b2142;
-  line-height: 1.8;
-  margin: 8px 0;
-  font-weight: 500;
-}
+/* =========================================
+   🌸 MAGICAL PINK FLOWER FRAME
+========================================= */
+/* =====================================
+   🌸 FLOWER FRAME AROUND LETTER
+===================================== */
 
 .poem-image-container {
-  background: transparent;
-  min-width: auto;
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  height: auto;
-  max-height: 65vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   padding: 0;
-  box-sizing: border-box;
-  margin-bottom: 0;
-}
-
-.letter-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 10px;
-}
-
-/* Slideshow Section */
-.slideshow-section {
-  width: 100%;
-  max-height: 100vh; /* full screen height */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 30px rgba(255, 209, 232, 0.3);
-  border-radius: 20px;
-  padding: 60px 20px;
-  margin: 0;
-
-  box-sizing: border-box;
-}
-
-/* Container */
-.slideshow-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-height: 100vh;
-  margin: 0;
-}
-
-/* Wrapper */
-.slideshow-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  aspect-ratio: auto;
   border-radius: 0;
-  overflow: hidden;
-  box-shadow: none;
-  border: none;
-}
-
-
-.slide {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.slide.active {
-  opacity: 1;
-}
-
-.slide img {
-  width: 100% !important;
-  height: 100% !important;
-   object-fit: contain  !important;
-}
-img {
-  overflow: visible !important;
-  overflow-clip-margin: unset !important;
-}
-
-.heart-overlay {
-  position: absolute;
-  font-size: 3rem;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
-/* Navigation Buttons */
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 77, 166, 0.7);
-  color: white;
-  border: none;
-  font-size: 2rem;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  z-index: 10;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-btn:hover {
-  background: rgba(255, 77, 166, 1);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.prev-btn {
-  left: 10px;
-}
-
-.next-btn {
-  right: 10px;
-}
-
-/* Indicators */
-.indicators {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #e0e0e0;
-  border: 2px solid #ff4da6;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-}
-
-.dot.active {
-  background: #ff4da6;
-  transform: scale(1.2);
-}
-
-.dot:hover {
-  background: rgba(255, 77, 166, 0.6);
-}
-
-/* Toggle Button */
-.toggle-btn {
-  background: linear-gradient(135deg, #ff4da6, #ff1493);
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  font-size: 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  box-shadow: 0 5px 15px rgba(255, 77, 166, 0.3);
-  margin: 20px auto;
-  display: block;
-}
-
-.toggle-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 77, 166, 0.4);
-}
-
-.toggle-btn:active {
-  transform: translateY(0);
-}
-
-/* Home Button */
-.home-btn {
+  background: transparent;
   display: inline-block;
-  margin-top: 20px;
-  padding: 10px 25px;
-  background: linear-gradient(135deg, #ff4da6, #ff1493);
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(255, 77, 166, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.home-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 77, 166, 0.4);
+
+
+/* Letter image */
+.letter-image {
+  display: block;
+  max-width: 420px;
+  border-radius: 15px;
 }
 
-/* Decorative Roses */
+/* =========================================
+   LETTER IMAGE
+========================================= */
+.letter-image {
+  position: relative;
+  z-index: 2;
+  max-width: 420px;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 15px;
+}
+
+/* =========================================
+   DECORATIVE ROSES
+========================================= */
 .rose-decoration {
   position: fixed;
   font-size: 3rem;
@@ -489,185 +145,75 @@ img {
 .rose-decoration.left {
   left: 20px;
   top: 30px;
-  animation-delay: 0s;
 }
 
 .rose-decoration.right {
   right: 20px;
   bottom: 30px;
-  animation-delay: 0.5s;
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
-/* Background Music Control */
-.background-music {
-  display: none;
-}
-
-/* Animations */
-@keyframes fadeIn {
+/* =========================================
+   ANIMATIONS
+========================================= */
+@keyframes magicalGlow {
   from {
-    opacity: 0;
-    transform: translateY(10px);
+    box-shadow:
+      0 0 20px rgba(255, 105, 180, 0.4),
+      0 0 40px rgba(255, 182, 193, 0.3);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    box-shadow:
+      0 0 40px rgba(255, 105, 180, 0.7),
+      0 0 80px rgba(255, 182, 193, 0.6);
   }
 }
 
-/* Responsive Design */
+@keyframes sparkleMove {
+  0% {
+    background-position: 0 0, 20px 20px;
+  }
+  100% {
+    background-position: 80px 80px, 100px 100px;
+  }
+}
+
+@keyframes shineMove {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
 @media (max-width: 768px) {
-  .valentine-content-combined {
-    flex-direction: column;
-    gap: 10px;
-    padding: 0;
-  }
-
-  .letter-section {
-    width: 90%;
-    max-width: 100%;
-    max-height: 75vh;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    padding: 20px;
-    background: transparent;
-  }
-
-  .slideshow-section-combined {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-  }
-
-  .poem-title {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .poem-image-container {
-    min-width: auto;
-    max-height: 40vh;
-    background: transparent;
-  }
-
-  .slideshow-container {
-    max-height: 100%;
-  }
-
-  .rose-decoration {
-    font-size: 2rem;
-  }
-
-  .heart-overlay {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .valentine-content-combined {
-    flex-direction: column;
-    gap: 5px;
-    padding: 0;
-  }
-
-  .letter-section {
-    width: 95%;
-    max-width: 100%;
-    max-height: 70vh;
-    padding: 15px;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    background: transparent;
-  }
-
-  .slideshow-section-combined {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-  }
-
-  .poem-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-  }
-
-  .poem-image-container {
-    min-width: auto;
-    max-height: 35vh;
-    border: none;
-    background: transparent;
-  }
-
-  .slideshow-container {
-    max-height: 100%;
-  }
-
-  .rose-decoration {
-    font-size: 2rem;
-  }
-}
-
-/* Responsive - Tablet */
-@media (max-width: 768px) {
-  .scrapbook-container {
-    height: 90vh;
-  }
 
   .polaroid img {
     width: 120px;
     height: 120px;
   }
 
-  .scrapbook-letter {
-    max-width: 400px;
-    max-height: 500px;
-    padding: 15px;
-  }
-
   .letter-image {
-    max-height: 450px;
+    max-width: 300px;
   }
 }
 
-/* Responsive - Mobile */
 @media (max-width: 480px) {
-  .scrapbook-container {
-    height: 95vh;
-  }
 
   .polaroid img {
     width: 80px;
     height: 80px;
   }
 
-  .scrapbook-letter {
-    max-width: 280px;
-    max-height: 400px;
-    padding: 10px;
-    font-size: 0.85rem;
-  }
-
-  .letter-tape {
-    width: 50px;
-    height: 18px;
-  }
-
   .letter-image {
-    max-height: 350px;
+    max-width: 240px;
   }
 }

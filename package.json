@@ -15,6 +15,7 @@
     "react": "^19.2.0",
     "react-canvas-confetti": "^2.0.7",
     "react-dom": "^19.2.0",
+    "react-svg": "^16.4.2",
     "tsparticles": "^3.9.1"
   },
   "devDependencies": {

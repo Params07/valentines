@@ -65,11 +65,7 @@ const Valentine: React.FC = () => {
     <div className="valentine-container">
         <Hearts delay={0.5} />
         <RosePetals/>
-      {/* Decorative Elements */}
-      <div className="rose-decoration left">🌹</div>
-      <div className="rose-decoration right">🌹</div>
-      {/* Background Music - Plays from 3:35 to 4:22 */}
-      <audio ref={audioRef} className="background-music">
+      <audio ref={audioRef} className="background-music" autoPlay>
         <source
           src="/Tum Se Hi From Jab We Met-320kbps.mp3"
           type="audio/mpeg"
@@ -80,6 +76,7 @@ const Valentine: React.FC = () => {
       {/* Main Content - Scrapbook Layout */}
       <div className="valentine-content-combined">
         <div className="scrapbook-container">
+
           {/* 4 Images from current set - Cycling through all 6 */}
           {imageSets[imageSet].map((imageIdx, positionIdx) => {
             const position = randomPositions[positionIdx]
@@ -92,10 +89,8 @@ const Valentine: React.FC = () => {
 
           {/* Center Letter */}
           <div className="scrapbook-letter">
-            <div className="letter-tape top-tape"></div>
-            <div className="letter-tape bottom-tape"></div>
             <div className="poem-image-container">
-              <img src="/letter.jpeg" alt="Handwritten Letter" className="letter-image" />
+              <img src="/Pink and White Floral Watercolour Stationery A4 Page Border.png" alt="Handwritten Letter" className="letter-image" />
             </div>
           </div>
         </div>
