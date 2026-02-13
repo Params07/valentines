@@ -1,20 +1,28 @@
 import React, { useMemo } from 'react'
 
-type ButterflySpec = { left: number; top: number; delay: number; duration: number; size: number; color: string }
+type ButterflySpec = { left: number; top: number; delay: number; duration: number; size: number; color1: string; color2: string }
 
-const BUTTERFLY_COLORS = ['#ff69b4', '#ff1493', '#ffb6c1', '#ffc0cb', '#ff4da6']
+const BUTTERFLY_COLORS = [
+  { primary: '#ff69b4', secondary: '#ffb6c1' },
+  { primary: '#ff1493', secondary: '#ffc0cb' },
+  { primary: '#ffb6c1', secondary: '#ffc0cb' },
+  { primary: '#ff4da6', secondary: '#ff69b4' },
+  { primary: '#ff2d95', secondary: '#ff69b4' },
+]
 
 const Butterflies: React.FC<{ delay?: number }> = ({ delay = 0 }) => {
   const butterflies = useMemo(() => {
     const arr: ButterflySpec[] = []
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 15; i++) {
+      const colors = BUTTERFLY_COLORS[Math.floor(Math.random() * BUTTERFLY_COLORS.length)]
       arr.push({
         left: Math.round(Math.random() * 100),
         top: Math.round(Math.random() * 80),
-        delay: delay + +(Math.random() * 5).toFixed(2),
-        duration: +(6 + Math.random() * 8).toFixed(2),
-        size: 30 + Math.round(Math.random() * 40),
-        color: BUTTERFLY_COLORS[Math.floor(Math.random() * BUTTERFLY_COLORS.length)],
+        delay: delay + +(Math.random() * 6).toFixed(2),
+        duration: +(7 + Math.random() * 9).toFixed(2),
+        size: 40 + Math.round(Math.random() * 50),
+        color1: colors.primary,
+        color2: colors.secondary,
       })
     }
     return arr
@@ -35,22 +43,58 @@ const Butterflies: React.FC<{ delay?: number }> = ({ delay = 0 }) => {
             animationDuration: `${b.duration}s`,
           }}
         >
-          <svg viewBox="0 0 200 200" fill="none" stroke={b.color} strokeWidth="2">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
             {/* Upper left wing */}
-            <path d="M 100 100 Q 60 60 40 50 Q 30 45 35 70 Q 50 90 100 100" fill={b.color} opacity="0.8" />
+            <path
+              d="M 100 100 Q 70 70 50 40 Q 35 20 40 60 Q 55 85 100 100 Z"
+              fill={b.color1}
+              opacity="0.9"
+            />
+            {/* Upper left wing details */}
+            <circle cx="55" cy="50" r="4" fill={b.color2} opacity="0.7" />
+            <circle cx="60" cy="65" r="3" fill={b.color2} opacity="0.7" />
+
             {/* Upper right wing */}
-            <path d="M 100 100 Q 140 60 160 50 Q 170 45 165 70 Q 150 90 100 100" fill={b.color} opacity="0.8" />
+            <path
+              d="M 100 100 Q 130 70 150 40 Q 165 20 160 60 Q 145 85 100 100 Z"
+              fill={b.color1}
+              opacity="0.9"
+            />
+            {/* Upper right wing details */}
+            <circle cx="145" cy="50" r="4" fill={b.color2} opacity="0.7" />
+            <circle cx="140" cy="65" r="3" fill={b.color2} opacity="0.7" />
+
             {/* Lower left wing */}
-            <path d="M 100 100 Q 70 130 50 150 Q 40 160 55 150 Q 80 130 100 100" fill={b.color} opacity="0.6" />
+            <path
+              d="M 100 100 Q 75 125 60 155 Q 50 175 65 150 Q 80 125 100 100 Z"
+              fill={b.color2}
+              opacity="0.75"
+            />
+            {/* Lower left wing details */}
+            <circle cx="70" cy="140" r="3" fill={b.color1} opacity="0.6" />
+
             {/* Lower right wing */}
-            <path d="M 100 100 Q 130 130 150 150 Q 160 160 145 150 Q 120 130 100 100" fill={b.color} opacity="0.6" />
+            <path
+              d="M 100 100 Q 125 125 140 155 Q 150 175 135 150 Q 120 125 100 100 Z"
+              fill={b.color2}
+              opacity="0.75"
+            />
+            {/* Lower right wing details */}
+            <circle cx="130" cy="140" r="3" fill={b.color1} opacity="0.6" />
+
             {/* Body */}
-            <ellipse cx="100" cy="100" rx="8" ry="20" fill={b.color} />
+            <ellipse cx="100" cy="100" rx="6" ry="18" fill={b.color1} />
             {/* Head */}
-            <circle cx="100" cy="85" r="6" fill={b.color} />
-            {/* Antennae */}
-            <line x1="100" y1="80" x2="95" y2="65" stroke={b.color} strokeWidth="1.5" />
-            <line x1="100" y1="80" x2="105" y2="65" stroke={b.color} strokeWidth="1.5" />
+            <circle cx="100" cy="88" r="5" fill={b.color1} />
+            {/* Eyes */}
+            <circle cx="97" cy="86" r="1.5" fill="#ffffff" opacity="0.8" />
+            <circle cx="103" cy="86" r="1.5" fill="#ffffff" opacity="0.8" />
+            {/* Antennae left */}
+            <line x1="98" y1="84" x2="88" y2="65" stroke={b.color1} strokeWidth="1.5" strokeLinecap="round" />
+            <circle cx="88" cy="65" r="2" fill={b.color1} />
+            {/* Antennae right */}
+            <line x1="102" y1="84" x2="112" y2="65" stroke={b.color1} strokeWidth="1.5" strokeLinecap="round" />
+            <circle cx="112" cy="65" r="2" fill={b.color1} />
           </svg>
         </div>
       ))}
@@ -59,4 +103,5 @@ const Butterflies: React.FC<{ delay?: number }> = ({ delay = 0 }) => {
 }
 
 export default Butterflies
+
 
