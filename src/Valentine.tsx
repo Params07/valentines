@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react'
 import './Valentine.css'
 import Hearts from './Hearts'
 import RosePetals from './Rosepedal'
+import Balloons from './Balloons'
+import Butterflies from './Butterflies'
 
 const Valentine: React.FC = () => {
   const [imageSet, setImageSet] = useState(0)
@@ -65,6 +67,8 @@ const Valentine: React.FC = () => {
     <div className="valentine-container">
         <Hearts delay={0.5} />
         <RosePetals/>
+        <Balloons/>
+        <Butterflies delay={0.3} />
       <audio ref={audioRef} className="background-music" autoPlay>
         <source
           src="/Tum Se Hi From Jab We Met-320kbps.mp3"

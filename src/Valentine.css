@@ -63,6 +63,22 @@ html, body {
   animation: fadeInOut 6s infinite ease-in-out;
 }
 
+.polaroid:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.polaroid:nth-child(2) {
+  animation-delay: 1.5s;
+}
+
+.polaroid:nth-child(3) {
+  animation-delay: 3s;
+}
+
+.polaroid:nth-child(4) {
+  animation-delay: 4.5s;
+}
+
 .polaroid img {
   width: 220px;
   height: 220px;
@@ -155,6 +171,44 @@ html, body {
 @keyframes float {
   0%,100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
+}
+
+/* =========================================
+   BUTTERFLIES
+========================================= */
+.butterflies-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.butterfly {
+  position: fixed;
+  animation: flutter 8s infinite ease-in-out;
+}
+
+@keyframes flutter {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-150px) translateX(80px) rotate(15deg);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-300px) translateX(0) rotate(-5deg);
+    opacity: 0;
+  }
 }
 
 /* =========================================
